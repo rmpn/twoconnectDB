@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<!-- Logging Properties -->
+	<Properties>
+		<Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="conexao.ConexaoBD" additivity="false" level="trace">
+			<AppenderRef ref="traceLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="conexao.ConexaoBD" additivity="false" level="debug">
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="conexao.ConexaoBD" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!--app.ClienteDB -->
+		<Logger name="app.ClienteDB" additivity="false" level="trace">
+			<AppenderRef ref="traceLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="app.ClienteDB" additivity="false" level="debug">
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="app.ClienteDB" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!--listas.RequisicaoPagamentoDAO -->
+		<Logger name="listas.RequisicaoPagamentoDAO" additivity="false" level="trace">
+			<AppenderRef ref="traceLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="listas.RequisicaoPagamentoDAO" additivity="false" level="debug">
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="listas.RequisicaoPagamentoDAO" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+
+		<Root level="error">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
