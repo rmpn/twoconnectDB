@@ -54,8 +54,20 @@
 		<Logger name="listas.RequisicaoPagamentoDAO" additivity="false" level="info">
 			<AppenderRef ref="Console" />
 		</Logger>
-
-
+        <!--pje.ProcessoDAO -->
+		<Logger name="pje.ProcessoDAO" additivity="false" level="trace">
+			<AppenderRef ref="traceLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="pje.ProcessoDAO" additivity="false" level="debug">
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="pje.ProcessoDAO" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
 		<Root level="error">
 			<AppenderRef ref="Console" />
 		</Root>

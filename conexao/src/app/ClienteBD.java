@@ -20,12 +20,14 @@ public class ClienteBD {
 	
 	public static ConexaoBD geBancoDeDados = new ConexaoBD("con_pje.properties");
 	
-	public static RequisicaoPagamentoDAO rp;  
+	// public static RequisicaoPagamentoDAO rp;  
+	
+	public static ProcessoDAO nr;
 
 	public static void main(String[] args) {
 			
 		      
-		logger.info(String.valueOf("Início ClienteDB: " + new SimpleDateFormat("dd/MM/yyyy 'as' hh:mm:ss").format(new Date())));
+		// logger.info(String.valueOf("Início ClienteDB: " + new SimpleDateFormat("dd/MM/yyyy 'as' hh:mm:ss").format(new Date())));
 		/*		
 		rp = new RequisicaoPagamentoDAO(geBancoDeDados.conecta());
 		List<?> reg = rp.getReqPag("01/01/2000","31/12/2022");
@@ -35,8 +37,8 @@ public class ClienteBD {
 		} 
 		*/
 		
-		ProcessoDAO pd = new ProcessoDAO(geBancoDeDados.conecta());
-		System.out.println(pd.toString());
+		nr = new ProcessoDAO(geBancoDeDados.conecta());
+		nr.getProcessoPJE("290.195.243-72","06.309.123/0001-95");
 		
 		geBancoDeDados.desconecta();
 			
