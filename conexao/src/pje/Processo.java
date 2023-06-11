@@ -4,16 +4,20 @@ import java.util.Objects;
 
 public class Processo {
 	
+	private Integer idprocesso;
 	private String nrprocesso; 
+	private String nrprocesso_ref;
 	private String docrfbautor;
 	private String nomeautor;
 	private String docrfbreu;
 	private String nomereu;
 	
 	
-	public Processo(String nrprocesso, String docrfbautor, String nomeautor, String docrfbreu, String nomereu) {
+	public Processo(Integer idprocesso, String nrprocesso, String nrprocesso_ref, String docrfbautor, String nomeautor, String docrfbreu, String nomereu) {
 		super();
+		this.idprocesso = idprocesso;
 		this.nrprocesso = nrprocesso;
+		this.nrprocesso_ref = nrprocesso_ref;
 		this.docrfbautor = docrfbautor;
 		this.nomeautor = nomeautor;
 		this.docrfbreu = docrfbreu;
@@ -23,18 +27,38 @@ public class Processo {
 	
 	
 	
+	public Integer getIdprocesso() {
+		return idprocesso;
+	}
+
+
+
+
+	public void setIdprocesso(Integer idprocesso) {
+		this.idprocesso = idprocesso;
+	}
+
+
+
+
 	public String getNrprocesso() {
 		
 		return nrprocesso;
 	}
 
-
-
-
 	public void setNrprocesso(String nrprocesso) {
 		this.nrprocesso = nrprocesso; 
 	}
 
+
+	public String getNrprocesso_ref() {
+		return nrprocesso_ref;
+	}
+
+
+	public void setNrprocesso_ref(String nrprocesso_ref) {
+		this.nrprocesso_ref = nrprocesso_ref;
+	}
 
 
 
@@ -43,20 +67,14 @@ public class Processo {
 	}
 
 
-
-
 	public void setDocrfbautor(String docrfbautor) {
 		this.docrfbautor = docrfbautor;
 	}
 
 
-
-
 	public String getNomeautor() {
 		return nomeautor;
 	}
-
-
 
 
 	public void setNomeautor(String nomeautor) {
@@ -94,10 +112,14 @@ public class Processo {
 
 
 
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(docrfbautor, docrfbreu, nomeautor, nomereu, nrprocesso);
+		return Objects.hash(docrfbautor, docrfbreu, idprocesso, nomeautor, nomereu, nrprocesso);
 	}
+
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -109,9 +131,10 @@ public class Processo {
 			return false;
 		Processo other = (Processo) obj;
 		return Objects.equals(docrfbautor, other.docrfbautor) && Objects.equals(docrfbreu, other.docrfbreu)
-				&& Objects.equals(nomeautor, other.nomeautor) && Objects.equals(nomereu, other.nomereu)
-				&& Objects.equals(nrprocesso, other.nrprocesso);
+				&& Objects.equals(idprocesso, other.idprocesso) && Objects.equals(nomeautor, other.nomeautor)
+				&& Objects.equals(nomereu, other.nomereu) && Objects.equals(nrprocesso, other.nrprocesso);
 	}
+
 
 
 

@@ -7,12 +7,19 @@ import java.util.Objects;
 public class RequisicaoPagamento {
 
 	private Double iidsolicitacao;
-	private String snrrequicao;
+	private String snrrequisicao;
 	private String snrprocesso;         
 	private Integer anovencimento;
 		
-	public RequisicaoPagamento(double iidsolicitacao, String snrrequicao, String snrprocesso, int anovencimento) {
-		// TODO Auto-generated constructor stub
+	public RequisicaoPagamento(double iidsolicitacao, String snrrequisicao, String snrprocesso, int anovencimento) {
+		
+		String p = snrprocesso;
+		
+		this.iidsolicitacao = iidsolicitacao;
+		this.snrrequisicao = snrrequisicao;
+		this.snrprocesso = p.substring(0, 7)+"-"+p.substring(7,9)+"."+p.substring(9,13)+"."+p.substring(13,14)+"."+p.substring(14,16)+"."+p.substring(16,20);
+		this.anovencimento = anovencimento;
+		
 	}
 
 	public Double getIidsolicitacao() {
@@ -23,12 +30,12 @@ public class RequisicaoPagamento {
 		this.iidsolicitacao = iidsolicitacao;
 	}
 
-	public String getSnrrequicao() {
-		return snrrequicao;
+	public String getSnrrequisicao() {
+		return snrrequisicao;
 	}
 
-	public void setSnrrequicao(String snrrequicao) {
-		this.snrrequicao = snrrequicao;
+	public void setSnrrequisicao(String snrrequicao) {
+		this.snrrequisicao = snrrequicao;
 	}
 
 	public String getSnrprocesso() {
@@ -50,7 +57,7 @@ public class RequisicaoPagamento {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(iidsolicitacao, snrprocesso, snrrequicao);
+		return Objects.hash(iidsolicitacao, snrprocesso, snrrequisicao);
 	}
 
 	@Override
@@ -63,12 +70,12 @@ public class RequisicaoPagamento {
 			return false;
 		RequisicaoPagamento other = (RequisicaoPagamento) obj;
 		return Objects.equals(iidsolicitacao, other.iidsolicitacao) && Objects.equals(snrprocesso, other.snrprocesso)
-				&& Objects.equals(snrrequicao, other.snrrequicao);
+				&& Objects.equals(snrrequisicao, other.snrrequisicao);
 	}
 
 	@Override
 	public String toString() {
-		return "RequicaoPagamento [iidsolicitacao=" + iidsolicitacao + ", snrrequicao=" + snrrequicao + ", snrprocesso="
+		return "RequicaoPagamento [iidsolicitacao=" + iidsolicitacao + ", snrrequisicao=" + snrrequisicao + ", snrprocesso="
 				+ snrprocesso + "]";
 	}
 

@@ -10,15 +10,24 @@ public class RequisicaoPagamento {
 	private String snrrequisicao;
 	private String snrprocesso;         
 	private Integer anovencimento;
+	private String nmautor;
+	private String rfbautor;
+	private String nmreu;
+	private String rfbreu;
+	
 		
-	public RequisicaoPagamento(double iidsolicitacao, String snrrequisicao, String snrprocesso, Integer anovencimento) {
+	public RequisicaoPagamento(double iidsolicitacao, String snrrequisicao, String snrprocesso, Integer anovencimento, String nmautor,String rfbautor,String nmreu,String rfbreu) {
                                 
-		String p = snrprocesso; 
+		
 		
         this.iidsolicitacao = iidsolicitacao;
 		this.snrrequisicao = snrrequisicao;
-		this.snrprocesso = p.substring(0, 7)+"-"+p.substring(7,9)+"."+p.substring(9,13)+"."+p.substring(13,14)+"."+p.substring(14,16)+"."+p.substring(16,20);
+		this.snrprocesso = snrprocesso;
 		this.anovencimento = anovencimento;
+		this.nmautor = nmautor;
+		this.rfbautor = rfbautor;
+		this.nmreu = nmreu;
+		this.rfbreu = rfbreu;
 	}
 
 	public Double getIidsolicitacao() {
@@ -54,6 +63,40 @@ public class RequisicaoPagamento {
 		this.anovencimento = anovencimento;
 	}
 
+	
+	
+	public String getNmautor() {
+		return nmautor;
+	}
+
+	public void setNmautor(String nmautor) {
+		this.nmautor = nmautor;
+	}
+
+	public String getRFFBautor() {
+		return rfbautor;
+	}
+
+	public void setRFBautor(String rfbautor) {
+		this.rfbautor = rfbautor;
+	}
+
+	public String getNmreu() {
+		return nmreu;
+	}
+
+	public void setNmreu(String nmreu) {
+		this.nmreu = nmreu;
+	}
+
+	public String getRFBreu() {
+		return rfbreu;
+	}
+
+	public void setRFBreu(String rfbreu) {
+		this.rfbreu = rfbreu;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(iidsolicitacao, snrprocesso, snrrequisicao);
@@ -74,8 +117,7 @@ public class RequisicaoPagamento {
 
 	@Override
 	public String toString() {
-		return "RequicaoPagamento [iidsolicitacao=" + iidsolicitacao + ", snrrequisicao=" + snrrequisicao + ", snrprocesso="
-				+ snrprocesso + "]";
+		return (this.iidsolicitacao + ";" + this.snrrequisicao + ";" + this.snrprocesso + ";" +	this.anovencimento + ";" +	this.nmautor + ";" + this.rfbautor + ";" +	this.nmreu + ";" +	this.rfbreu) ;
 	}
 
 	

@@ -52,8 +52,6 @@ public class ConexaoBD {
 		this.usuario = leitorCofiguracao.getValue("usuario");
 		this.senha = leitorCofiguracao.getValue("senha");
 		//
-		// this.dataBasePrefix = "jdbc:oracle:thin";
-		// url = dataBasePrefix + ":@//" + maquina + ":" + portaBancoDeDados + "/" + nomeBancoDeDados; 
 		url = dataBasePrefix + "" + maquina + ":" + portaBancoDeDados + "/" + nomeBancoDeDados;
 		con = null;
 		logger.info(url);

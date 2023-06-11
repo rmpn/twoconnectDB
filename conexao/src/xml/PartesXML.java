@@ -402,7 +402,7 @@ public class PartesXML {
 				emailResultadoWS.setAddTo(usuarioEnvio);
 				emailResultadoWS.enviar();
 				/* Grava arquivo texto com resposta do webservices */
-				ArquivoTexto.gravaLog(mensagem);
+				ArquivoTexto.gravaArquivo(mensagem);
 			} else {
 				descricaoErroGeral = resultado.getChild("descricaoErroGeral");
 				qtdPartes = resultado.getChild("qtdPartes");
@@ -412,7 +412,7 @@ public class PartesXML {
 				logger.info(" PROCESSOS COM ERRO: " + qtdProcessos.getText());
 
 				/* Grava arquivo texto com resposta do webservices */
-				ArquivoTexto.gravaLog(descricaoErroGeral.getText());
+				ArquivoTexto.gravaArquivo(descricaoErroGeral.getText());
 
 				// iteracao para acessar as partes com erro
 				partes = (Element) resultado.getChild("partes");
