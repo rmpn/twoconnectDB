@@ -98,13 +98,13 @@ public Connection con;
             	processo = new Processo(rs.getInt("id_processo"),
             			rs.getString("nr_processo"),
             			rs.getString("nr_processo_refe"),
+            			rfbDoc(rs.getString("rfbpoloa")),
             			rs.getString("poloa"),
-            			rs.getString("rfbpoloa"),
-                        rs.getString("polob"),
-                        rs.getString("rfbpolob"));	
+            			rfbDoc(rs.getString("rfbpolob")),
+                        rs.getString("polob"));	
             	processos.add(processo);
             	//
-            	logger.info(processo.getNrprocesso());
+            	logger.info(processo.toString());
             	//ArquivoTexto.gravaArquivo(String.valueOf(rp.toString()));
             	
             }
@@ -119,6 +119,27 @@ public Connection con;
 		return processos;
         
         }
+	
+public String rfbDoc (String valor) {
+		
+		String dummy = valor;
+		
+		
+		if (valor.length() == 11) {
+		
+	    dummy = dummy.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+	    
+		} 
+		
+		if (valor.length() == 14) {
+			
+		    dummy = dummy.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3\\/$4-$5");
+		    
+		} 
+		
+		return dummy;
+		
+	}
 		
 	}
 

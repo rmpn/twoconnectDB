@@ -92,6 +92,9 @@ public class Processo {
 
 
 	public void setDocrfbreu(String docrfbreu) {
+		
+		
+		
 		this.docrfbreu = docrfbreu;
 	}
 
@@ -140,7 +143,7 @@ public class Processo {
 
 	@Override
 	public String toString() {
-		return "Processo [nrprocesso=" + nrprocesso + ", nomeautor=" + nomeautor + ", nomereu=" + nomereu + "]";
+		return "Processo [nrprocesso=" + this.nrprocesso + ", poloa=" + this.nomeautor + ", rfbpoloa=" + this.docrfbautor +", polob=" + this.nomereu + ", rfbpolob=" + this.docrfbreu + "]";
 	}
 
 	
