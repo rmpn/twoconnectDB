@@ -38,7 +38,7 @@ public class ClienteBD {
 		*/
 		
 		nr = new ProcessoDAO(geBancoDeDados.conecta());
-		nr.getProcessoPJE("290.195.243-72","06.309.123/0001-95");
+		nr.getProcessosPJE1G("migrar_2Grau.txt");
 		
 		geBancoDeDados.desconecta();
 			

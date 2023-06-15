@@ -2,7 +2,7 @@ package pje;
 
 import java.util.Objects;
 
-public class Processo {
+public class Processo2G {
 	
 	private Integer idprocesso;
 	private String nrprocesso; 
@@ -13,7 +13,7 @@ public class Processo {
 	private String nomereu;
 	
 	
-	public Processo(Integer idprocesso, String nrprocesso, String nrprocesso_ref, String docrfbautor, String nomeautor, String docrfbreu, String nomereu) {
+	public Processo2G(Integer idprocesso, String nrprocesso, String nrprocesso_ref, String docrfbautor, String nomeautor, String docrfbreu, String nomereu) {
 		super();
 		this.idprocesso = idprocesso;
 		this.nrprocesso = nrprocesso;
@@ -132,7 +132,7 @@ public class Processo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Processo other = (Processo) obj;
+		Processo2G other = (Processo2G) obj;
 		return Objects.equals(docrfbautor, other.docrfbautor) && Objects.equals(docrfbreu, other.docrfbreu)
 				&& Objects.equals(idprocesso, other.idprocesso) && Objects.equals(nomeautor, other.nomeautor)
 				&& Objects.equals(nomereu, other.nomereu) && Objects.equals(nrprocesso, other.nrprocesso);
