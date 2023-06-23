@@ -25,7 +25,8 @@ public class ClienteBD {
 	public static ProcessoDAO nr;
 
 	public static void main(String[] args) {
-			
+		
+		//
 		      
 		// logger.info(String.valueOf("Início ClienteDB: " + new SimpleDateFormat("dd/MM/yyyy 'as' hh:mm:ss").format(new Date())));
 		/*		
