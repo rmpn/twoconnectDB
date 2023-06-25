@@ -18,15 +18,17 @@ public class ClienteBD {
 
 	public static Logger logger = LogManager.getLogger(ClienteBD.class.getName());
 	
-	public static ConexaoBD geBancoDeDados = new ConexaoBD("con_pje.properties");
+	public static ConexaoBD geBancoDeDados = new ConexaoBD("con_mysql.properties");
 	
-	// public static RequisicaoPagamentoDAO rp;  
+	public static RequisicaoPagamentoDAO rp;  
 	
 	public static ProcessoDAO nr;
 
 	public static void main(String[] args) {
 		
 		//
+		
+		geBancoDeDados.conecta();
 		      
 		// logger.info(String.valueOf("Início ClienteDB: " + new SimpleDateFormat("dd/MM/yyyy 'as' hh:mm:ss").format(new Date())));
 		/*		
@@ -38,8 +40,8 @@ public class ClienteBD {
 		} 
 		*/
 		
-		nr = new ProcessoDAO(geBancoDeDados.conecta());
-		nr.getProcessosPJE1G("migrar_2Grau.txt");
+		// nr = new ProcessoDAO(geBancoDeDados.conecta());
+		// nr.getProcessosPJE1G("migrar_2Grau.txt");
 		
 		geBancoDeDados.desconecta();
 			
