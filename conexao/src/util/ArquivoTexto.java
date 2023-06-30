@@ -30,7 +30,7 @@ public final class ArquivoTexto {
 		try {
 			
 			caminho= dir.getCanonicalPath();
-			FileWriter writer = new FileWriter(new File(caminho+"\\"+"migrar_2Grau.txt"),true);
+			FileWriter writer = new FileWriter(new File(caminho+"\\"+"xxx.txt"),true);
 			//
 			BufferedWriter bw  = new BufferedWriter(writer);
 			bw.write(mensagem);
@@ -47,6 +47,32 @@ public final class ArquivoTexto {
 			
 		}
 	}
+public static void gravaArquivo(String mensagem, String outfile) {
+		
+		
+		String caminho="";
+		File dir = new File (".");  
+		logger.info(String.valueOf("Registrando o log ..."));
+		try {
+			
+			caminho= dir.getCanonicalPath();
+			FileWriter writer = new FileWriter(new File(caminho+"\\"+outfile),true);
+			//
+			BufferedWriter bw  = new BufferedWriter(writer);
+			bw.write(mensagem);
+			bw.newLine();
+			//
+			bw.close();  
+			writer.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		
+			
+		}
+	}	
 	
 public static void lerArquivo(String arquivo) {
 		

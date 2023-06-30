@@ -12,11 +12,13 @@ public class RequisicaoPagamento {
 	private Integer anovencimento;
 	private String nmautor;
 	private String rfbautor;
+	private String nmexecutado;
+	private String rfbexecutado;
 	private String nmreu;
 	private String rfbreu;
 	
 		
-	public RequisicaoPagamento(double iidsolicitacao, String snrrequisicao, String snrprocesso, Integer anovencimento, String nmautor,String rfbautor,String nmreu,String rfbreu) {
+	public RequisicaoPagamento(double iidsolicitacao, String snrrequisicao, String snrprocesso, Integer anovencimento, String nmautor,String rfbautor,String nmreu,String rfbreu, String nmexecutado, String rfbexecutado ) {
                                 
 		
 		
@@ -28,6 +30,25 @@ public class RequisicaoPagamento {
 		this.rfbautor = rfbautor;
 		this.nmreu = nmreu;
 		this.rfbreu = rfbreu;
+		this.nmexecutado = nmexecutado;
+		this.rfbexecutado = rfbexecutado;
+		
+	}
+
+	public String getNmexecutado() {
+		return nmexecutado;
+	}
+
+	public void setNmexecutado(String nmexecutado) {
+		this.nmexecutado = nmexecutado;
+	}
+
+	public String getRfbexecutado() {
+		return rfbexecutado;
+	}
+
+	public void setRfbexecutado(String rfbexecutado) {
+		this.rfbexecutado = rfbexecutado;
 	}
 
 	public Double getIidsolicitacao() {
@@ -117,7 +138,7 @@ public class RequisicaoPagamento {
 
 	@Override
 	public String toString() {
-		return (this.iidsolicitacao + ";" + this.snrrequisicao + ";" + this.snrprocesso + ";" +	this.anovencimento + ";" +	this.nmautor + ";" + this.rfbautor + ";" +	this.nmreu + ";" +	this.rfbreu) ;
+		return (this.iidsolicitacao + ";" + this.snrrequisicao + ";" + this.snrprocesso + ";" +	this.anovencimento + ";" +	this.nmautor + ";" + this.rfbautor + ";" +	this.nmreu + ";" +	this.rfbreu + ";" +	this.nmexecutado + ";" + this.rfbexecutado) ;
 	}
 
 	

@@ -8,8 +8,23 @@ public class Processo1G {
 	private String nrprocesso; 
 	private String nomeautor;
 	private String docrfbautor;
+	private String ordautor;
 	private String nomereu;
 	private String docrfbreu;
+	private String ordreu;
+	
+	public Processo1G(Integer idprocesso, String nrprocesso, String nomeautor, String docrfbautor, String nomereu,
+			String docrfbreu,String ordautor, String ordreu) {
+		super();
+		this.idprocesso = idprocesso;
+		this.nrprocesso = nrprocesso;
+		this.nomeautor = nomeautor;
+		this.docrfbautor = docrfbautor;
+		this.nomereu = nomereu;
+		this.docrfbreu = docrfbreu;
+		this.ordautor = ordautor;
+		this.ordreu = ordreu;
+	}
 	
 	public Processo1G(Integer idprocesso, String nrprocesso, String nomeautor, String docrfbautor, String nomereu,
 			String docrfbreu) {
@@ -20,6 +35,8 @@ public class Processo1G {
 		this.docrfbautor = docrfbautor;
 		this.nomereu = nomereu;
 		this.docrfbreu = docrfbreu;
+		this.ordautor = ordautor;
+		this.ordreu = ordreu;
 	}
 
 	public Integer getIdprocesso() {
@@ -89,10 +106,8 @@ public class Processo1G {
 
 	@Override
 	public String toString() {
-		return "Processo1G [idprocesso=" + idprocesso + ", nrprocesso=" + nrprocesso + ", nomeautor=" + nomeautor
-				+ ", docrfbautor=" + docrfbautor + ", nomereu=" + nomereu + ", docrfbreu=" + docrfbreu + "]";
+		return idprocesso + ";" + nrprocesso + ";" + nomeautor + ";" + docrfbautor + ";" + ordautor + ";" + nomereu + ";" + docrfbreu +";"+ordreu;	
 	}
-	
 	
 	
 	

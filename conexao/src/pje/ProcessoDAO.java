@@ -14,6 +14,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import util.ArquivoLog;
+import util.ArquivoTexto;
+
 public class ProcessoDAO {
 	
 
@@ -157,6 +160,7 @@ public List<Processo1G> getProcessoPJE1G(String arquivo) {
 	String docrfbautor="";
 	String nomereu="";
 	String docrfbreu="";
+	
 	int contador=0;
     List<Processo1G> processos = new ArrayList<Processo1G>();
 	//	
@@ -386,6 +390,176 @@ public List<Processo1G> getProcessosPJE1G(String arquivo) {
         
         return processos;
      }
+
+public List<Processo1G> getProcessosNoPJE1G(String outfile) {
+	
+	
+	int idprocesso;
+	String nrprocesso=""; 
+	String nomeautor="";
+	String docrfbautor="";
+	String ordautor="";
+	String nomereu="";
+	String docrfbreu="";
+	String ordreu="";
+	
+	
+	
+    List<Processo1G> processos = new ArrayList<Processo1G>();
+	//	
+    Processo1G processo;
+    
+    //
+        
+    String caminho="";
+	File dir = new File (".");  
+	logger.info(String.valueOf("Registrando o log ..."));
+		
+	String[] partes;
+		
+	logger.info("######### ProcessoDAO ############ ");
+	      
+	String sqlProcesso = "select "
+			+ "    p.id_processo, "
+			+ "    p.nr_processo,  "
+			+ "    ptrf.id_proc_referencia, "
+			+ "    ptrf.ds_proc_referencia, "
+			+ "	oj.ds_orgao_julgador as orgao, "
+			+ "	TO_CHAR(ptrf.dt_autuacao,'YYYY'	) as ano, "
+			+ "	ptrf.dt_autuacao as autuacao, "
+			+ "	cj.ds_classe_judicial as classe, "
+			+ "	ul.ds_nome as nmpoloa, "
+			+ "	ul.ds_login as lgpoloa, "
+			+ "        case "
+			+ "		pp.in_participacao "
+			+ "		when 'A' then 'Ativo' "
+			+ "		when 'P' then 'Passivo' "
+			+ "		when 'T' then 'outros' "
+			+ "	end as poloa, "
+			+ "	pp.nr_ordem as poloaord, "
+			+ "	ux.ds_nome as nmpolob, "
+			+ "	ux.ds_login as lgpolob, "
+			+ "	case "
+			+ "		px.in_participacao "
+			+ "		when 'A' then 'Ativo' "
+			+ "		when 'P' then 'Passivo' "
+			+ "		when 'T' then 'outros' "
+			+ "	end as polob, "
+			+ "	px.nr_ordem as polobord "
+			+ "from pje.tb_processo_trf as ptrf  "
+			+ "inner JOIN pje.tb_processo as p on 	(ptrf.id_processo_trf = p.id_processo) "
+			+ "INNER join pje.tb_orgao_julgador as oj on 	(ptrf.id_orgao_julgador = oj.id_orgao_julgador) "
+			+ "INNER join pje.tb_processo_parte as pp on	(ptrf.id_processo_trf = pp.id_processo_trf) "
+			+ "inner join pje.tb_tipo_parte as tp on	(pp.id_tipo_parte = tp.id_tipo_parte) "
+			+ "inner join pje.tb_usuario_login as ul on	(pp.id_pessoa = ul.id_usuario) "
+			+ "INNER join pje.tb_classe_judicial cj on	(cj.id_classe_judicial = ptrf.id_classe_judicial) "
+			+ "INNER join tb_agrupamento_fase fase on (fase.id_agrupamento_fase = p.id_agrupamento_fase) "
+			+ "INNER join pje.tb_processo_parte as px on	(ptrf.id_processo_trf = px.id_processo_trf) "
+			+ "inner join pje.tb_tipo_parte as tx on	(tx.id_tipo_parte = px.id_tipo_parte) "
+			+ "inner join pje.tb_usuario_login as ux on	(px.id_pessoa = ux.id_usuario) "
+			+ "where 1 = 1 "
+			+ "and p.nr_processo is not null "
+			+ "and REGEXP_REPLACE(p.nr_processo,'[^[:digit:]]','','g') = REGEXP_REPLACE(?,'[^[:digit:]]','','g') "
+			+ "and ul.id_usuario in ( "
+			+ "select	xx.id_pessoa "
+			+ "		from "
+			+ "		pje.tb_pess_doc_identificacao xx where REGEXP_REPLACE(xx.nr_documento_identificacao,'[^[:digit:]]','','g') = REGEXP_REPLACE(?,'[^[:digit:]]','','g') "
+			+ " )	 "
+			+ " and ux.id_usuario in ( "
+			+ " select	yy.id_pessoa "
+			+ "		from "
+			+ "		pje.tb_pess_doc_identificacao yy where REGEXP_REPLACE(yy.nr_documento_identificacao,'[^[:digit:]]','','g') = REGEXP_REPLACE(?,'[^[:digit:]]','','g') "
+			+ " )";
+	
+	
+		// '0017294-54.2018.5.16.0005'
+	
+		PreparedStatement stmtProcesso;
+		try {
+			
+		stmtProcesso = con.prepareStatement(sqlProcesso);
+		
+		//-> ler arquivo aqui			
+		
+		caminho= dir.getCanonicalPath();
+				//
+		FileReader fr = new FileReader(caminho+"\\"+"migrar_2Grau.txt");
+		BufferedReader br = new BufferedReader(fr);
+				//
+		while(br.ready() ){
+					
+				String linha = br.readLine();
+				
+				//
+				String[] textoSeparado = linha.split(";");
+				stmtProcesso.setString(1, textoSeparado[2]);
+				stmtProcesso.setString(2, textoSeparado[7]);
+				stmtProcesso.setString(3, textoSeparado[9]);
+				ResultSet rs = stmtProcesso.executeQuery();
+				
+				System.out.println("'RP: "+textoSeparado[1]);
+				
+				int contador = 0;
+				//
+				while (rs.next()) {
+			         	//
+					    contador ++;
+			         	//
+					    System.out.println(textoSeparado[1]+" - "+rs.getString("nr_processo"));
+					    idprocesso = rs.getInt("id_processo");
+	         	        nrprocesso = rs.getString("nr_processo");
+	         	        //
+	         	        String poloA = rs.getString("poloa").trim();
+	         	        if (poloA.equals("A")) {
+	         	        	nomeautor = rs.getString("nmpoloa");
+	         	        	docrfbautor = rfbDoc(rs.getString("lgpoloa"));
+	         	        	ordautor = rs.getString("poloaord"); 
+	         	        	
+	         	        } else {
+	         	        	nomereu = rs.getString("nmpoloa");
+	         	        	docrfbreu = rfbDoc(rs.getString("lgpoloa"));
+	         	        	ordreu = rs.getString("poloaord"); 
+	         	        }
+	         	        //
+	         	       String poloB = rs.getString("polob").trim();
+	         	       if (poloA.equals("P")) {
+	         	        	
+	         	        	nomereu = rs.getString("nmpolob");
+	         	        	docrfbreu = rfbDoc(rs.getString("lgpolob"));
+	         	        	ordreu = rs.getString("polobord"); 
+	         	        	
+	         	        } else {
+	         	        	
+	         	        	nomeautor = rs.getString("nmpolob");
+	         	        	docrfbautor = rfbDoc(rs.getString("lgpolob"));
+	         	        	ordautor = rs.getString("poloaord"); 
+	         	        }
+					    // 
+                                                
+			         	processo = new Processo1G(idprocesso,nrprocesso,nomeautor,docrfbautor,ordautor,nomereu,docrfbreu,ordreu);
+			         	//
+			         	processos.add(processo);
+			         	ArquivoTexto.gravaArquivo(processo.toString()+";"+contador,outfile);
+			         	}
+			         	rs.close();
+			         }  
+		
+				br.close();
+				fr.close();
+				con.close();
+				//
+				
+			} catch (IOException | SQLException | ArrayIndexOutOfBoundsException e) {
+				// TODO Auto-generated catch block
+				
+				e.getMessage();
+				e.printStackTrace();
+				
+			}
+        return processos;
+        
+     }
+
 	
 	}
 

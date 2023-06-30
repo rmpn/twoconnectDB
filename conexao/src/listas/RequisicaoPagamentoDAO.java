@@ -50,6 +50,8 @@ public List<RequisicaoPagamento> getReqPag(String datini,  String datfim) {
 				+ "				   	substr(pj.SCNPJ, 1, 2)|| '.' || substr(pj.SCNPJ, 3, 3)|| '.' || substr(pj.SCNPJ, 6, 3)|| '/' || substr(pj.SCNPJ, 9, 4)|| '-' || substr(pj.SCNPJ, 13, 2) AS rfbreu, "
 				+ "                 pj.SCNPJ as cnpjreu, "  
 				+ "				   	p.SNMPESSOA AS nmreu, "
+				+ "                 wp.SNMPESSOA AS nmexecutado, "
+				+ "   	            substr(wj.SCNPJ, 1, 2)|| '.' || substr(wj.SCNPJ, 3, 3)|| '.' || substr(wj.SCNPJ, 6, 3)|| '/' || substr(wj.SCNPJ, 9, 4)|| '-' || substr(wj.SCNPJ, 13, 2) AS rfbexecutado, "
 				+ "				   	v.SNMVARA AS vara, "
 				+ "				   	(r.IANOVENCIMENTO - to_number(to_char(sysdate, 'yyyy'))) AS prazo, "
 				+ "				   	d.SIDESFERA AS esfera, "
@@ -78,13 +80,16 @@ public List<RequisicaoPagamento> getReqPag(String datini,  String datfim) {
 				+ "				   INNER JOIN GEP.TBBENEFICIARIO bf ON (bf.IIDBENEFICIARIO = b.IIDBENEFICIARIO)  "
 				+ "				   INNER JOIN gep.tbpessoa n ON (n.IIDPESSOA  = bf.IIDPESSOA)  "
 				+ "				   INNER JOIN gep.TBPESSOAFISICA pfb ON (pfb.IIDPESSOA = bf.IIDPESSOA)  "
+				+ "                INNER JOIN GEP.TBEXECUTADO w ON (w.IIDEXECUTADO = s.IIDEXECUTADO) "
+				+ "                INNER JOIN gep.TBPESSOA wp ON (wp.IIDPESSOA = w.IIDPESSOA)  "
+				+ "                left JOIN gep.TBPESSOAJURIDICA wj ON (wj.IIDPESSOA=wp.IIDPESSOA) "
 				+ "				   LEFT  JOIN gep.TBPESSOAJURIDICA pjb ON (pjb.IIDPESSOA = bf.IIDPESSOA)  "
 				+ "				   WHERE\r\n"
 				+ "				   1 = 1   "
 				+ "				   AND e.SNMSITUACAO = 'AUTUADA'  "
 				+ "				   AND s.SFLFINALIZADA = 1  "
 				+ "				   AND trunc(r.DDTAUTUACAO) BETWEEN to_date(?) AND to_date(?) "
-				+ "				   AND d.SIDESFERA NOT IN ('M','E','F1') ";
+				+ "				   AND d.SIDESFERA IN ('M','E','F') ";
 
 		PreparedStatement stmtProcesso;
 		try {
@@ -101,7 +106,7 @@ public List<RequisicaoPagamento> getReqPag(String datini,  String datfim) {
             	p = p.substring(0, 7)+"-"+p.substring(7,9)+"."+p.substring(9,13)+"."+p.substring(13,14)+"."+p.substring(14,16)+"."+p.substring(16,20);
                 // System.out.println(rfbDoc(rs.getString("cnpjreu"))+"------"+rfbDoc(rs.getString("rfbautor")));
             	rp = new RequisicaoPagamento(rs.getDouble("IIDSOLICITACAO"),rs.getString("SNRREQUISICAO"),p,rs.getInt("DATORC"),rs.getString("NMREU"),rfbDoc(rs.getString("RFBREU")),
-                        rs.getString("NMAUTOR"),rfbDoc(rs.getString("RFBAUTOR")));	
+                        rs.getString("NMAUTOR"),rfbDoc(rs.getString("RFBAUTOR")),rs.getString("NMEXECUTADO"),rfbDoc(rs.getString("RFBEXECUTADO")));	
             	requisicaoPagamento.add(rp);
             	ArquivoTexto.gravaArquivo(String.valueOf(rp.toString()));
             }
